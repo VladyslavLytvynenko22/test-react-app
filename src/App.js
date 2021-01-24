@@ -16,19 +16,19 @@ class App extends Component {
   deletePersonHandler = (personIndex) => {
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
-    this.setState({persons: persons});
+    this.setState({ persons: persons });
   };
 
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => p.id === id);
-    const person = {...this.state.persons[personIndex]};
+    const person = { ...this.state.persons[personIndex] };
 
     person.name = event.target.value;
 
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({persons: persons});
+    this.setState({ persons: persons });
   };
 
   togglePersonsHandler = () => {
@@ -37,7 +37,7 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
       font: 'ingerit',
       border: '1x solid blue',
       padding: '8px',
@@ -59,6 +59,8 @@ class App extends Component {
           })}
         </div>
       );
+
+      style.backgroundColor = 'red';
     }
 
     return (
