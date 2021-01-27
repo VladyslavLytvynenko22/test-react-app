@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import Person from './Person/Person';
-import classes from './App.css';
+import Person from "./Person/Person";
+import classes from "./App.module.css";
 
 class App extends Component {
   state = {
     persons: [
-      { id: 'n1', name: 'Vlad', age: 24 },
-      { id: 'n2', name: 'Olga', age: 25 },
-      { id: 'n3', name: 'Vira', age: 30 }
+      { id: "n1", name: "Vlad", age: 24 },
+      { id: "n2", name: "Olga", age: 25 },
+      { id: "n3", name: "Vira", age: 30 },
     ],
-    otherState: 'some other value',
-    showPersons: false
+    otherState: "some other value",
+    showPersons: false,
   };
 
   deletePersonHandler = (personIndex) => {
@@ -21,7 +21,7 @@ class App extends Component {
   };
 
   nameChangeHandler = (event, id) => {
-    const personIndex = this.state.persons.findIndex(p => p.id === id);
+    const personIndex = this.state.persons.findIndex((p) => p.id === id);
     const person = { ...this.state.persons[personIndex] };
 
     person.name = event.target.value;
@@ -38,24 +38,27 @@ class App extends Component {
 
   render() {
     let persons = null;
-    let btnClass = '';
+    let btnClass = "";
 
     if (this.state.showPersons) {
       persons = (
-        <div >
+        <div>
           {this.state.persons.map((person, index) => {
-            return <Person
-              click={() => this.deletePersonHandler(index)}
-              name={person.name}
-              age={person.age}
-              key={person.id}
-              changed={(event) => this.nameChangeHandler(event, person.id)} />
+            return (
+              <Person
+                click={() => this.deletePersonHandler(index)}
+                name={person.name}
+                age={person.age}
+                key={person.id}
+                changed={(event) => this.nameChangeHandler(event, person.id)}
+              />
+            );
           })}
         </div>
       );
 
       btnClass = classes.Red;
-    };
+    }
 
     const assignedClasses = [];
     if (this.state.persons.length <= 2) {
@@ -68,16 +71,14 @@ class App extends Component {
     return (
       <div className={classes.App}>
         <h1>Hi, I'm react app</h1>
-        <p className={assignedClasses.join(' ')}>This is really working!</p>
-        <button
-          className={btnClass}
-          onClick={this.togglePersonsHandler}>
+        <p className={assignedClasses.join(" ")}>This is really working!</p>
+        <button className={btnClass} onClick={this.togglePersonsHandler}>
           Toggle Persons
         </button>
         {persons}
       </div>
     );
-  };
+  }
 }
 
 export default App;
