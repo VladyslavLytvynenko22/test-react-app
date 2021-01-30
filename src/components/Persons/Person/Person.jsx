@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import classes from "./Person.module.css";
+import classes from './Person.module.css';
 
 const person = (props) => {
   if(1) throw new Error()
