@@ -3,6 +3,7 @@ import React from "react";
 import classes from "./Person.module.css";
 
 const person = (props) => {
+  if(1) throw new Error();
   return (
     <div className={classes.Person}>
       <p onClick={props.click}>
