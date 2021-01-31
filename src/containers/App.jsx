@@ -13,6 +13,7 @@ class App extends Component {
     ],
     otherState: 'some other value',
     showPersons: false,
+    showCockpit: true,
   };
 
   deletePersonHandler = (personIndex) => {
@@ -37,8 +38,14 @@ class App extends Component {
     this.setState({ showPersons: !this.state.showPersons });
   };
 
+  changeCockpitHandler = () => {
+    this.setState({ showCockpit: !this.state.showCockpit });
+  };
+
   render() {
     let persons = null;
+    let cockpit = null;
+    let buttonText = 'Show cockpit';
 
     if (this.state.showPersons) {
       persons = (
@@ -50,13 +57,21 @@ class App extends Component {
       );
     }
 
-    return (
-      <div className={classes.App}>
+    if (this.state.showCockpit) {
+      cockpit = (
         <Cockpit
           showPersons={this.state.showPersons}
-          persons={this.state.persons}
+          personsLength={this.state.persons.length}
           clicked={this.togglePersonsHandler}
         />
+      );
+      buttonText = 'Hide cockpit';
+    }
+
+    return (
+      <div className={classes.App}>
+        <button onClick={this.changeCockpitHandler}>{buttonText}</button>
+        {cockpit}
         {persons}
       </div>
     );
