@@ -6,7 +6,7 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-axios.interceptors.request.use(
+var myRequestInterceptor = axios.interceptors.request.use(
   (request) => {
     return request;
   },
@@ -15,8 +15,7 @@ axios.interceptors.request.use(
     Promise.reject(error);
   }
 );
-
-axios.interceptors.response.use(
+var myResponseInterceptor = axios.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -25,6 +24,9 @@ axios.interceptors.response.use(
     Promise.reject(error);
   }
 );
+
+axios.interceptors.request.eject(myRequestInterceptor);
+axios.interceptors.response.eject(myResponseInterceptor);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
