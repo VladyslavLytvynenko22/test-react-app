@@ -29,9 +29,9 @@ class Blog extends Component {
       });
   }
 
-  postSelectedHandler(id) {
+  postSelectedHandler = (id) => {
     this.setState({ selectedPostId: id });
-  }
+  };
 
   render() {
     let posts = <p style={{ textAlign: 'center' }}>Something went wrong!</p>;
