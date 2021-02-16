@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
+import FullPost from './../FullPost/FullPost';
 import Post from '../../../components/Post/Post';
+import { Route } from 'react-router-dom';
 import axios from './../../../axios';
 import classes from './Posts.module.css';
 
@@ -43,7 +45,16 @@ export default class Posts extends Component {
         );
       });
     }
-
-    return <section className={classes.Posts}>{posts}</section>;
+    let path = this.props.match.url;
+    if (path.slice(-1) !== '/' && path.slice(-1) !== '\\') {
+      path = path + '/';
+    }
+    path = path + ':id';
+    return (
+      <div>
+        <section className={classes.Posts}>{posts}</section>
+        <Route path={path} exact component={FullPost} />
+      </div>
+    );
   }
 }
