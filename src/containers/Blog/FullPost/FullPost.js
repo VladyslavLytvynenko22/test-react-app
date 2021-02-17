@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 
+import axios from 'axios';
 import classes from './FullPost.module.css';
 
 class FullPost extends Component {
@@ -8,25 +8,34 @@ class FullPost extends Component {
     loadedPost: null,
   };
 
+  componentDidMount() {
+    this.loadData();
+  }
+
   componentDidUpdate() {
+    this.loadData();
+  }
+
+  loadData() {
     if (
-      this.props.id > -1 &&
+      this.props.match.params.id > -1 &&
       (!this.state.loadedPost ||
-        (this.state.loadedPost && this.state.loadedPost.id !== this.props.id))
+        (this.state.loadedPost &&
+          this.state.loadedPost.id != this.props.match.params.id))
     ) {
       axios
-        .get('/posts/' + this.props.id)
+        .get('/posts/' + this.props.match.params.id)
         .then((result) => this.setState({ loadedPost: result.data }));
     }
   }
 
   deletePostHandler = () => {
-    axios.delete('/posts/' + this.props.id);
+    axios.delete('/posts/' + this.props.match.params.id);
   };
 
   render() {
     let post = <p style={{ textAlign: 'center' }}>Please select a Post!</p>;
-    if (this.props.id > -1) {
+    if (this.props.match.params.id > -1) {
       post = <p style={{ textAlign: 'center' }}>Loading...</p>;
     }
 
